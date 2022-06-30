@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: fleetman-position-simulator-deployment
+   labels:
+      apps: fleetman-position-simulator
+spec:
+  replicas: 1
+  selector:
+     matchLabels:
+        apps: fleetman-position-simulator
+  template:
+     metadata:
+        labels:
+           apps: fleetman-position-simulator
+     spec:
+        containers:
+        - name: fleetman-position-simulator
+          image: richardchesterwood/k8s-fleetman-position-simulator:release1
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: local-microservice
